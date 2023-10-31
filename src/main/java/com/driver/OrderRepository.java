@@ -16,20 +16,26 @@ public class OrderRepository {
 
 
     public void addOrder(Order order) {
+        if(order == null)
+            return;
+
         if(!orderIds.containsKey(order.getId()))
             orderIds.put(order.getId(), order);
     }
 
     public void addPartner(String partnerId) {
+        if(partnerId == null)
+            return;
+
         if(!deliveryPartner.containsKey(partnerId))
             deliveryPartner.put(partnerId, new DeliveryPartner(partnerId));
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
-        if(!orderPartnerPair.containsKey(orderId))
+        if(!orderPartnerPair.containsKey(orderId)) {
             orderPartnerPair.put(orderId, partnerId);
-
-        deliveryPartner.get(partnerId).setNumberOfOrders(deliveryPartner.get(partnerId).getNumberOfOrders() + 1);
+            deliveryPartner.get(partnerId).setNumberOfOrders(deliveryPartner.get(partnerId).getNumberOfOrders() + 1);
+        }
     }
 
     public Order getOrderById(String orderId) {
