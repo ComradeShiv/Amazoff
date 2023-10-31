@@ -95,7 +95,7 @@ public class OrderRepository {
     }
 
     public String getLastDeliveryTimeByPartnerId(String partnerId) {
-        int time = Integer.MIN_VALUE;
+        int time = 0;
         for(Map.Entry<String, String> pair: orderPartnerPair.entrySet()) {
             if(pair.getValue().equals(partnerId))
                 time = Math.max(time, orderIds.get(pair.getKey()).getDeliveryTime());
