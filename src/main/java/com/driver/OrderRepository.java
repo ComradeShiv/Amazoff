@@ -72,10 +72,16 @@ public class OrderRepository {
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
+        String[] val = time.split(":");
+        int HH = Integer.parseInt(val[0]);
+        int MM = Integer.parseInt(val[1]);
+
+        int Time = HH*60 + MM;
         int count = 0;
+
         for(Map.Entry<String, String> pair: orderPartnerPair.entrySet()) {
             if (pair.getValue().equals(partnerId))
-                if (orderIds.get(pair.getKey()).getDeliveryTime() > Integer.parseInt((time)))
+                if (orderIds.get(pair.getKey()).getDeliveryTime() > Time)
                     count += 1;
         }
 
