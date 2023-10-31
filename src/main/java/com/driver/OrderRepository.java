@@ -101,7 +101,9 @@ public class OrderRepository {
                 time = Math.max(time, orderIds.get(pair.getKey()).getDeliveryTime());
         }
 
-        return String.valueOf(time);
+        int MM = time%60;
+        int HH = time/60;
+        return HH + ":" + MM;
     }
 
     public void deletePartnerById(String partnerId) {
